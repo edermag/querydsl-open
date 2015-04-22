@@ -10,7 +10,7 @@ import com.mysema.query.types.MappingProjection;
 /**
  * Mapper QueryDSL responsavel por converter <code>Tuple</code> em <code>CategoriaGroup</code>.
  * 
- * @author YaW Tecnologia
+ * @author <a href="mailto:eder@yaw.com.br">Eder Magalhães</a>
  */
 public class CategoriaGroupMapper extends MappingProjection<CategoriaGroup> {
 	
