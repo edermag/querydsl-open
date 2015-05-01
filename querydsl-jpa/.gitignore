@@ -3,3 +3,6 @@
 /.settings
 .classpath
 .project
+.gradle/
+build/
+src/main/generated/
