@@ -85,9 +85,5 @@ public class FiltrosPesquisaMercadoria {
 	public Integer getLinhas() {
 		return QTD_LINHAS_TABELA;
 	}
-	
-	public int getOffset() {
-		return pagina > 0 ? pagina * getLinhas() : 0;
-	}
 
 }

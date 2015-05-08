@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YaW Tecnologia | App Demo Spring MVC, QueryDSL, JQuery e Foundation</title>
+    <title>YaW Tecnologia | App Demo Spring MVC, Spring Data, QueryDSL, JQuery e Foundation</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/vendor/modernizr.js"></script>
   </head>
@@ -20,7 +20,7 @@
       </div>
       
       <div class="large-10 columns">
-        <h2 class="subheader">Projeto: Spring MVC e QueryDSL</h2>
+        <h2 class="subheader">Projeto: Spring MVC, Spring Data e QueryDSL</h2>
       </div>
       
       <div class="large-12 columns">
@@ -95,7 +95,7 @@
                   <option value="id">ID</option>
                   <option value="nome">Nome</option>
                   <option value="descricao">Descrição</option>
-                  <option value="categoria">Categoria</option>
+                  <option value="categoria.descricao">Categoria</option>
                   <option value="preco">Preço</option>
                 </select>
               </label>
@@ -146,7 +146,7 @@
               <a href="http://www.yaw.com.br" title="YaW Tecnologia" target="open">YaW Tecnologia</a>
             </div>
             <div class="large-10 columns">
-              <strong>Projeto livre</strong>, demonstração das tecnologias <em>QueryDSL</em>, <em>Spring MVC</em>, <em>Spring Boot</em> e <em>Foundation</em>. Veja mais detalhes desse projeto no Github.</p>
+              <strong>Projeto livre</strong>, demonstração das tecnologias <em>QueryDSL</em>, <em>Spring Data JPA</em>, <em>Spring MVC</em>, <em>Spring Boot</em> e <em>Foundation</em>. Veja mais detalhes desse projeto no Github.</p>
             </div>
           </div>
       	</div>
@@ -261,7 +261,7 @@
       $(document).ready(function() {
         closeMsg = $('<a>', {href: "#", text: 'x', class: 'close'});
         pageNumber = 0;
-      
+        
         $("#search").click(function(){
 		  searchMercadorias();
 	    });

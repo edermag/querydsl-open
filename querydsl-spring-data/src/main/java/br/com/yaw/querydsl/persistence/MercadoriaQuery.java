@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 
 import br.com.yaw.querydsl.model.CategoriaGroup;
 import br.com.yaw.querydsl.model.FiltrosPesquisaMercadoria;
-import br.com.yaw.querydsl.model.Mercadoria;
 import br.com.yaw.querydsl.model.QCategoria;
 import br.com.yaw.querydsl.model.QMercadoria;
 import br.com.yaw.querydsl.model.mapper.CategoriaGroupMapper;
@@ -17,9 +16,6 @@ import com.google.common.base.Strings;
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.jpa.impl.JPAUpdateClause;
-import com.mysema.query.types.Expression;
-import com.mysema.query.types.Order;
-import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.Predicate;
 
 /**
@@ -29,12 +25,12 @@ import com.mysema.query.types.Predicate;
  */
 public final class MercadoriaQuery {
 
-	private MercadoriaQuery() {
-		
+	private MercadoriaQuery() {	
 	}
 	
-	private static Predicate whereByCriterio(QMercadoria mercadoria, 
-			FiltrosPesquisaMercadoria filtros) {
+	public static Predicate whereByCriterio(FiltrosPesquisaMercadoria filtros) {
+		QMercadoria mercadoria = QMercadoria.mercadoria;
+		
 		BooleanBuilder builder = new BooleanBuilder();
 		
 		if (!Strings.isNullOrEmpty(filtros.getDescricaoMercadoria())) {
@@ -60,47 +56,6 @@ public final class MercadoriaQuery {
 		return builder;
 	}
 	
-	private static OrderSpecifier<?> orderBy(QMercadoria mercadoria, String field) {
-		Expression expression = mercadoria.id;
-		
-		if (!Strings.isNullOrEmpty(field)) {
-			switch (field) {
-			case "nome": expression = mercadoria.nome; break;
-			case "descricao": expression = mercadoria.descricao; break;
-			case "categoria": expression = mercadoria.categoria.descricao; break;
-			case "preco": expression = mercadoria.preco; break;
-			}
-		}
-		
-		return new OrderSpecifier<Comparable>(Order.ASC, expression);
-	}
-	
-	public static List<Mercadoria> findAllByCriterio(EntityManager em, FiltrosPesquisaMercadoria filtros) {
-		JPAQuery query = new JPAQuery(em);
-		QMercadoria mercadoria = new QMercadoria("m");
-		
-		Predicate where = whereByCriterio(mercadoria, filtros);
-		int offset = filtros.getOffset();
-		
-		return query.from(mercadoria)
-				.where(where)
-				.offset(offset)
-				.limit(filtros.getLinhas())
-				.orderBy(orderBy(mercadoria, filtros.getOrdem()))
-				.list(mercadoria);
-	}
-	
-	public static long countByCriterio(EntityManager em, FiltrosPesquisaMercadoria filtros) {
-		JPAQuery query = new JPAQuery(em);
-		QMercadoria mercadoria = new QMercadoria("m");
-		
-		Predicate where = whereByCriterio(mercadoria, filtros);
-		
-		return query.from(mercadoria)
-				.where(where)
-				.count();
-	}
-	
 	public static List<CategoriaGroup> findAllGroupedByCategoria(EntityManager em) {
 		JPAQuery query = new JPAQuery(em);
 		QMercadoria mercadoria = new QMercadoria("m");
@@ -112,9 +67,8 @@ public final class MercadoriaQuery {
 				.list(new CategoriaGroupMapper(categoria, mercadoria));
 	}
 	
-	public static long updatePrecosByCriterio(EntityManager em, double percentual, FiltrosPesquisaMercadoria filtros) {
-		QMercadoria mercadoria = new QMercadoria("m");
-		Predicate where = whereByCriterio(mercadoria, filtros);
+	public static long updatePrecosByCriterio(EntityManager em, double percentual, Predicate where) {
+		QMercadoria mercadoria = QMercadoria.mercadoria;
 		
 		return new JPAUpdateClause(em, mercadoria)
 			.where(where)
