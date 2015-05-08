@@ -9,9 +9,6 @@ Sobre o Spring Boot, mais informações estam disponíveis na url: http://projec
 
 Trata-se de um projeto aberto e livre, para fins de estudo.
 
-Na pasta comandos-mongo, você encontra exemplos de comandos para manipular dados no MongoDB via shell:
-* Insert, Update, Delete, Query e Aggregation.
-
 Detalhes da implementação
 -------
 Tecnologias utilizadas na implementação:
@@ -19,6 +16,7 @@ Tecnologias utilizadas na implementação:
 * QueryDSL: na camada de persistência, geração das consultas via código Java;
 * JPA/Hibernate: tecnologia base da camada de persistência (ORM);
 * HSQLDB: banco de dados Java em memória;
+* Spring MVC: framework MVC do back-end;
 * Foundation: framework css;
 * JQuery: framework JavaScript;
 * Spring Boot: template de dependências e web container embutido;

@@ -5,20 +5,20 @@ Aplicação Java Web demonstra como trabalhar com o QueryDSL, uma tecnologia par
 Além disso nesse projeto utilizo o Spring MVC, Spring Transaction, JQuery e Foundation (front-end). O build e ciclo de vida do projeto são gerenciados pelo Maven ou Gradle. Na verdade utilizo o Spring Boot para facilitar as dependência e para contar um web container (Tomcat) embutido.
 
 Saiba mais sobre o QueryDSL nessa url: http://www.querydsl.com/
+Mais detalhes sobre o projeto Spring Data: http://projects.spring.io/spring-data/
 Sobre o Spring Boot, mais informações estam disponíveis na url: http://projects.spring.io/spring-boot/
 
 Trata-se de um projeto aberto e livre, para fins de estudo.
-
-Na pasta comandos-mongo, você encontra exemplos de comandos para manipular dados no MongoDB via shell:
-* Insert, Update, Delete, Query e Aggregation.
 
 Detalhes da implementação
 -------
 Tecnologias utilizadas na implementação:
 
 * QueryDSL: na camada de persistência, geração das consultas via código Java;
+* Spring Data JPA: módulo de otimização de persistência do Spring;
 * JPA/Hibernate: tecnologia base da camada de persistência (ORM);
 * HSQLDB: banco de dados Java em memória;
+* Spring MVC: framework MVC do back-end;
 * Foundation: framework css;
 * JQuery: framework JavaScript;
 * Spring Boot: template de dependências e web container embutido;
