@@ -1,0 +1,278 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YaW Tecnologia | App Demo Spring MVC, Spring Data, QueryDSL, JQuery e Foundation</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="large-12 columns">
+        <p></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="large-2 columns">
+        <img src="logo_yaw.png">
+      </div>
+      
+      <div class="large-10 columns">
+        <h2 class="subheader">Projeto: Spring MVC, Spring Data e QueryDSL</h2>
+      </div>
+      
+      <div class="large-12 columns">
+        <p></p>
+      </div>
+    </div>
+
+    <section role="main" class="scroll-container">    
+    <div class="row">
+      <div class="large-12 columns">
+        <h4>Mercadorias <small>Listagem</small></h4>
+      </div>
+      <hr>
+    </div>
+    
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="row">
+          <div class="large-6 columns">
+            <div id="msg" data-alert class="alert-box success radius" style="display: none">
+              <a href="#" class="close">&times;</a>
+            </div>
+            <div id="msgError" data-alert class="alert-box alert radius" style="display: none">
+              <a href="#" class="close">&times;</a>
+            </div>
+          </div>
+             
+        </div>
+          
+        <form id="filterform">
+          <div class="row">
+            <div class="large-6 columns">
+              <label>Nome
+                <input type="text" name="nomeMercadoria" placeholder="informe o nome da mercadoria" />
+              </label>
+            </div>
+            <div class="large-6 columns">
+              <label>Descrição
+                <input type="text" name="descricaoMercadoria" placeholder="informe descrição da mercadoria" />
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-6 columns">
+              <label>Categoria
+                <input type="text" name="categoria" placeholder="informe a categoria" />
+              </label>
+            </div>
+            <div class="large-6 columns">
+              <div class="row collapse prefix-radius">
+              <label>Preco</label>
+                <div class="small-2 columns">
+                  <span class="prefix">De</span>
+                </div>
+                <div class="small-4 columns">
+                  <input type="text" name="precoDe" placeholder="preço de">
+                </div>
+                
+                <div class="small-4 columns">
+                  <input type="text" name="precoAte" placeholder="preço até">
+                </div>
+                <div class="small-2 columns">
+                  <span class="prefix">Até</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-3 columns">
+              <label>Ordem
+                <select name="ordem">
+                  <option value="id">ID</option>
+                  <option value="nome">Nome</option>
+                  <option value="descricao">Descrição</option>
+                  <option value="categoria.descricao">Categoria</option>
+                  <option value="preco">Preço</option>
+                </select>
+              </label>
+            </div>
+            <div class="large-5 columns"></div>
+            <div class="large-4 text-right columns">
+              <a href="#" class="button radius success" id="search">Pesquisar</a>
+              <a href="#" class="button radius alert" id="increase">Aumentar</a>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="large-12 columns">
+        <p></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="large-12 columns">
+        <table id="datatable">
+          <thead>
+            <tr>
+              <th width="50">#</th>
+              <th width="200">Nome</th>
+              <th width="200">Descrição</th>
+              <th width="200">Categoria</th>
+              <th width="150">Preço</th>
+              <th width="150">Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        
+        <ul class="pagination"></ul>
+      </div>
+    </div>
+    </section>
+    
+      <div class="medium-12 columns">
+      	<div class="panel">
+          <div class="row">
+            <div class="large-2 text-center columns">
+              <a href="http://www.yaw.com.br" title="YaW Tecnologia" target="open">YaW Tecnologia</a>
+            </div>
+            <div class="large-10 columns">
+              <strong>Projeto livre</strong>, demonstração das tecnologias <em>QueryDSL</em>, <em>Spring Data JPA</em>, <em>Spring MVC</em>, <em>Spring Boot</em> e <em>Foundation</em>. Veja mais detalhes desse projeto no Github.</p>
+            </div>
+          </div>
+      	</div>
+      </div>
+
+    
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      
+      function formData(){
+        var d = {
+          'nomeMercadoria': $("#nomeMercadoria").val(),
+          'descricaoMercadoria': $("#descricaoMercadoria").val(),
+          'categoria': $("#categoria").val(),
+          'precoDe': $("#precoDe").val(),
+          'precoAte': $("#precoAte").val()
+        };
+        
+        return d;
+      }
+      
+      function searchMercadorias() {
+        $("#msg").text("").hide();
+        $("#msgError").text("").hide();
+        $("#datatable").find("tbody").html("");
+        
+        var filtros = $('#filterform').serialize();
+        filtros += "&pagina="+pageNumber;
+        
+        $.ajax({
+          type: 'GET',
+    	  url: "/?" + filtros,
+          dataType: 'json',
+          success: function(json) {
+            $.each(json.mercadorias, function(index, data){ 
+              var $tr = $('<tr>').append(
+                $('<td>').text(data.id),
+                $('<td>').text(data.nome),
+                $('<td>').text(data.descricao),
+                $('<td>').text(data.categoria.descricao),
+                $('<td>').text(data.preco.toFixed(2)),
+                $('<td>').text(data.quantidade)
+              );
+              
+              $("#datatable").find("tbody").append($tr);
+            });
+            createPagination(json.quantidade);
+          },
+          error: function(data){
+            showAlert('error', 'Algo não funcionou como esperado... '+data);
+          }
+        });
+      }
+      
+      function increasePreco() {
+        $("#msg").text("").hide();
+        $("#msgError").text("").hide();
+        
+        var filtros = $('#filterform').serialize();
+        
+        $.ajax({
+          type: 'POST',
+    	  url: "/increase",
+          dataType: 'json',
+          data: filtros,
+          success: function(data) {
+            if (typeof data === 'unsigned') {
+              showAlert('error', 'Algo não funcionou como esperado, não foi possível avalidar o resultado!');
+              return;
+            }
+            
+            if (data > 0) {
+              searchMercadorias();
+              showAlert('success', 'Preços foram atualizados!');
+            }
+          },
+          error: function(data){
+            showAlert('error', 'Algo não funcionou como esperado... '+data);
+          }
+        });
+      }
+      
+      function showAlert(type, message) {
+        var $id = type === 'error' ? '#msgError' : '#msg';
+        $($id).text(message);
+        $($id).append(closeMsg).show();
+      }
+      
+      function createPagination(totalRows){
+        var totalPages = Math.ceil(totalRows / 10);
+        
+      	var lis = "<li class='arrow " + (pageNumber == 0 ? 'unavailable' : '') + "'><a onclick='pageClick(0)'>&laquo;</a></li>";
+      	for (i = 0; i < totalPages; i++) { 
+      	  lis += "<li class='" + (pageNumber == i ? 'current' : '') + "'><a onclick='pageClick("+i+")'>" + (i+1)+ "</a></li>";
+      	}
+      	
+      	lis += "<li class='arrow "+ (pageNumber == (totalPages - 1) ? 'unavailable' : '') +"'><a onclick='pageClick("+(totalPages-1)+")'>&raquo;</a></li>";
+      	$('.pagination').empty();
+      	$('.pagination').append(lis);
+      }
+      
+      function pageClick(page) {
+        pageNumber = page;
+	    searchMercadorias();
+      }
+      
+      var closeMsg;
+      var pageNumber;
+      
+      $(document).ready(function() {
+        closeMsg = $('<a>', {href: "#", text: 'x', class: 'close'});
+        pageNumber = 0;
+        
+        $("#search").click(function(){
+		  searchMercadorias();
+	    });
+	    
+	    $("#increase").click(function(){
+		  increasePreco();
+	    });
+	    
+	    searchMercadorias();
+      });
+      
+    </script>
+  </body>
+</html>

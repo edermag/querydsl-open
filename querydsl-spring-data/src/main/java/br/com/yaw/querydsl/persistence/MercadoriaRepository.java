@@ -25,8 +25,7 @@ import br.com.yaw.querydsl.model.Mercadoria;
 public interface MercadoriaRepository
 	extends JpaRepository<Mercadoria, Long>, QueryDslPredicateExecutor<Mercadoria> {
 
-	default public long updateAllPrecos(EntityManager em, double percentual, Predicate where) {
-		
+	default long updateAllPrecos(EntityManager em, double percentual, Predicate where) {
 		return updatePrecosByCriterio(em, percentual, where);
 	}
 	
