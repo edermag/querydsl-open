@@ -22,6 +22,7 @@ import br.com.yaw.querydsl.model.PesquisaMercadorias;
 import br.com.yaw.querydsl.persistence.MercadoriaRepository;
 
 import com.google.common.collect.Lists;
+import com.mysema.query.types.Predicate;
 
 /**
  * Controller das funcionalidade sobre a <code>Mercadoria</code>.
@@ -43,8 +44,9 @@ public class MercadoriaController {
 		Pageable page = buildPageRequest(filtros.getPagina(), 
 				filtros.getLinhas(), filtros.getOrdem());
 		
-		long total = repository.count(whereByCriterio(filtros));
-		List<Mercadoria> mercadorias = Lists.newArrayList(repository.findAll(whereByCriterio(filtros), page));
+		Predicate predicate = whereByCriterio(filtros);
+		long total = repository.count(predicate);
+		List<Mercadoria> mercadorias = Lists.newArrayList(repository.findAll(predicate, page));
 		return new PesquisaMercadorias(total, mercadorias);
 	}
 	
