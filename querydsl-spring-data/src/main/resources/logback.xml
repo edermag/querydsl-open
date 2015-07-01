@@ -11,11 +11,7 @@
   
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <!-- caminho para o arquivo de log -->
-    <file>/var/log/java/logistic/logFile.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>/var/log/java/logistic/logFile.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
-      <maxHistory>30</maxHistory>
-    </rollingPolicy>
+    <file>./logFile.log</file>
 
     <layout>
       <Pattern>
