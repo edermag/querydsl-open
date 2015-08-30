@@ -9,24 +9,11 @@
     </layout>
   </appender>
   
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!-- caminho para o arquivo de log -->
-    <file>./logFile.log</file>
-
-    <layout>
-      <Pattern>
-        %d [%thread] %-5level %logger{40} %X{key} - %msg%n
-      </Pattern>
-    </layout>
-  </appender>
-  
   <logger name="org.springframework" level="warn"/>
-  <logger name="org.springframework.web" level="debug" />
+  <logger name="org.springframework.web" level="warn" />
   <logger name="org.quartz" level="warn"/>
   
-  <logger name="br.com.brokerstecnologia" level="debug">
-    <appender-ref ref="FILE"/>
-  </logger>
+  <logger name="br.com.yaw" level="debug" />
   
   <root level="ERROR">
     <appender-ref ref="CONSOLE"/>
