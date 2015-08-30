@@ -61,15 +61,5 @@ public class MercadoriaController {
 		double dezPorCento = 1.1;
 		return repository.updateAllPrecos(em, dezPorCento, whereByCriterio(filtros));
 	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public void save(Mercadoria m) {
-		repository.save(m);
-	}
-	
-	@RequestMapping(method = RequestMethod.DELETE)
-	public void delete(Long mercadoriaId) {
-		repository.delete(mercadoriaId);
-	}
-	
+		
 }

@@ -1,11 +1,10 @@
 package br.com.yaw.querydsl.web;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.lessThan;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,19 +36,10 @@ public class MercadoriaControllerTest {
 	private WebApplicationContext context;
 
 	private MockMvc mvc;
-	
+
 	@Before
 	public void setUp() {
 		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-	}
-	
-	@Test
-	public void testHealth() throws Exception {
-		this.mvc.perform(get("/health")
-				.accept(MediaType.APPLICATION_JSON)
-				)
-			.andExpect(status().isOk())
-			.andExpect(content().string(containsString("UP")));
 	}
 	
 	@Test
@@ -63,18 +53,8 @@ public class MercadoriaControllerTest {
 	}
 	
 	@Test
-	public void testGetByQuantidade_2() throws Exception {
-		this.mvc.perform(get("/by-quantidade")
-				.param("quantidade", "2")
-				.accept(MediaType.APPLICATION_JSON)
-				)
-			.andExpect(status().isOk());
-	}
-	
-	@Test
-	public void testGetByDescricao() throws Exception {
-		this.mvc.perform(get("/by-descricao")
-				.param("descricao", "Coca-cola")
+	public void testIncreaseAll() throws Exception {
+		this.mvc.perform(post("/increase")
 				.accept(MediaType.APPLICATION_JSON)
 				)
 			.andExpect(status().isOk());

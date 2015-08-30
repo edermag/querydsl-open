@@ -25,8 +25,6 @@
         <querydsl.version>3.6.3</querydsl.version>
         <guava.version>r09</guava.version>
 
-        <junit.version>4.8.1</junit.version>
-
         <docker.image.prefix>yaw</docker.image.prefix>
     </properties>
     
@@ -83,6 +81,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
