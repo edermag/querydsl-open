@@ -40,7 +40,7 @@ public class MercadoriaController {
 		return new PesquisaMercadorias(total, mercadorias);
 	}
 	
-	@RequestMapping(value="/group/by-categoria", method = RequestMethod.GET)
+	@RequestMapping(value="/group-by-categoria", method = RequestMethod.GET)
 	public List<CategoriaGroup> groupByCategorias() {
 		return findAllGroupedByCategoria(em);
 	}

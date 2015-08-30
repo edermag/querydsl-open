@@ -24,8 +24,6 @@
         <spring.boot.version>1.2.5.RELEASE</spring.boot.version>
         <querydsl.version>3.6.3</querydsl.version>
         <guava.version>r09</guava.version>
-
-        <junit.version>4.8.1</junit.version>
     </properties>
     
     <repositories>
@@ -73,7 +71,7 @@
             <version>${guava.version}</version>
         </dependency>
         
-        <!-- Spring Boot: Web e JPA -->
+        <!-- Spring Boot: Web, JPA e Testes -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -81,6 +79,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     

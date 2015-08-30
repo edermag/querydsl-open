@@ -1,5 +1,7 @@
 package br.com.yaw.querydsl.model;
 
+import com.google.common.base.Strings;
+
 /**
  * Bean mantém os dados do formulário de pesquisa de mercadoria.
  * 
@@ -7,6 +9,8 @@ package br.com.yaw.querydsl.model;
  */
 public class FiltrosPesquisaMercadoria {
 
+	private static final String CAMPO_ORDEM_DEFAULT = "id";
+	
 	private static final int QTD_LINHAS_TABELA = 10;
 	
 	private String categoria;
@@ -64,6 +68,9 @@ public class FiltrosPesquisaMercadoria {
 	}
 	
 	public String getOrdem() {
+		if (Strings.isNullOrEmpty(ordem)) {
+			return CAMPO_ORDEM_DEFAULT;
+		}
 		return ordem;
 	}
 	
@@ -87,7 +94,8 @@ public class FiltrosPesquisaMercadoria {
 	}
 	
 	public int getOffset() {
-		return pagina > 0 ? pagina * getLinhas() : 0;
+		return pagina != null && pagina > 0 
+				? pagina * getLinhas() : 0;
 	}
 
 }

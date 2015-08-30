@@ -58,7 +58,7 @@ public class MercadoriaController {
 		return repository.findByQuantidadeEqualOrGreather(quantidade);
 	}
 	
-	@RequestMapping(value="/group/by-categoria", method = RequestMethod.GET)
+	@RequestMapping(value="/group-by-categoria", method = RequestMethod.GET)
 	public List<CategoriaGroup> groupByCategorias() {
 		return repository.groupByCategorias(template);
 	}
