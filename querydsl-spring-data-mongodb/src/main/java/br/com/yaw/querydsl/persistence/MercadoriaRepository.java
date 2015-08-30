@@ -14,7 +14,6 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
-import org.springframework.stereotype.Repository;
 
 import br.com.yaw.querydsl.model.CategoriaGroup;
 import br.com.yaw.querydsl.model.Mercadoria;
@@ -24,7 +23,6 @@ import br.com.yaw.querydsl.model.Mercadoria;
  * 
  * @author <a href="mailto:eder@yaw.com.br">Eder Magalhães</a>
  */
-@Repository
 public interface MercadoriaRepository
 	extends MongoRepository<Mercadoria, Long>, QueryDslPredicateExecutor<Mercadoria> {
 

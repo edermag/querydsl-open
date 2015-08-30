@@ -21,13 +21,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         
-        <spring.boot.version>1.2.5.RELEASE</spring.boot.version>
         <querydsl.version>3.6.3</querydsl.version>
         <guava.version>r09</guava.version>
         <mongodb.driver.version>2.10.1</mongodb.driver.version>
         <morphia.version>0.105</morphia.version>
         <genson.version>0.99</genson.version>
-        <junit.version>4.8.1</junit.version>
     </properties>
     
     <repositories>
@@ -56,10 +54,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-      <groupId>org.mongodb.morphia</groupId>
-      <artifactId>morphia</artifactId>
-      <version>${morphia.version}</version>
-    </dependency>
+          <groupId>org.mongodb.morphia</groupId>
+          <artifactId>morphia</artifactId>
+          <version>${morphia.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-mongodb</artifactId>
@@ -87,7 +85,7 @@
 		    <version>${genson.version}</version>
 		</dependency>
         
-        <!-- Spring Boot: Web e JPA -->
+        <!-- Spring Boot: Web, JPA e Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -95,6 +93,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     

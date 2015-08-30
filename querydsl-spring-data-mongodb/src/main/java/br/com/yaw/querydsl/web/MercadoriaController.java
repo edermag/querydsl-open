@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +63,6 @@ public class MercadoriaController {
 		return repository.groupByCategorias(template);
 	}
 	
-	@Transactional(rollbackFor = Exception.class)
 	@RequestMapping(value="/increase", method = RequestMethod.POST)
 	public Long incresePrecos(FiltrosPesquisaMercadoria filtros) {
 		double dezPorCento = 1.1;
@@ -73,16 +71,6 @@ public class MercadoriaController {
 		mercadorias.forEach(m -> m.aumentarPreco(dezPorCento));
 		repository.save(Lists.newArrayList(mercadorias));
 		return (long) mercadorias.size();
-	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public void save(Mercadoria m) {
-		repository.save(m);
-	}
-	
-	@RequestMapping(method = RequestMethod.DELETE)
-	public void delete(Long mercadoriaId) {
-		repository.delete(mercadoriaId);
 	}
 	
 }
